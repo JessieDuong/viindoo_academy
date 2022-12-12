@@ -74,7 +74,7 @@ class EducationClass(models.Model):
         default = lambda self: self.env.company,
         )
     
-    responsible_id = fields.Many2one(comodel_name='education.student', string='Responsible user', default = lambda self: self.env.user)
+    responsible_id = fields.Many2one(comodel_name='res.users', string='Responsible user', default = lambda self: self.env.user)
     
     _sql_constraints = [
         ('unique_class_name','unique(name)','The class name must be unique'),
