@@ -1,0 +1,80 @@
+<odoo>
+    <data>
+        <record id="view_education_technical_kanban" model="ir.ui.view">
+            <field name="name">education.technical.kanban</field>
+            <field name="model">education.technical</field>
+            <field name="arch" type="xml">
+                <kanban string="Education Technical Kanban">
+                    <field name="name"></field>
+                </kanban>
+            </field>
+        </record>
+         
+	    <record id="view_education_technical_tree" model="ir.ui.view">
+	        <field name="name">education.technical.tree</field>
+	        <field name="model">education.technical</field> 
+	        <field name="arch" type="xml">
+	            <tree string="Education Technical Tree view">
+	                <field name="name"></field>
+	                <field name="description"></field>
+	                <field name="year"></field>
+	                <field name="age"></field>
+	                <field name="state"></field>
+	            </tree>        
+	        </field>      
+	    </record>
+    
+	    <record id="view_education_technical_form" model="ir.ui.view">
+	        <field name="name">education.technical.form</field>
+	        <field name="model">education.technical</field>
+	        <field name="arch" type="xml">
+	            <form string="Education Technical Form View">
+	                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"></widget>
+	                <header>
+                        <field name="state" widget="statusbar"></field>	                   
+	                </header>
+	                <group>
+	                    <group>
+		                    <field name="name"></field>
+		                    <field name="active" invisible="1"></field>
+		                    <field name="description"></field>
+	                    </group>
+		                <group>
+			                <field name="year"></field>
+			                <field name="age"></field>
+		                </group>
+	                </group>
+	            </form>
+	        </field>
+	    </record>
+    
+	    <record id="view_education_technical_search" model="ir.ui.view">
+	        <field name="name">education.technical.search</field>
+	        <field name="model">education.technical</field>
+	        <field name="arch" type="xml">
+	            <search string="Education Technical Search">
+		            <field name="name"></field>
+		            <field name="year"></field>
+		            <field name="age"></field>
+		            <filter string="Status" name="ftr_status" domain="[('state','=','confirmed')]"></filter>
+		            <separator/>
+		            <filter string="Year" name="ftr_year" domain="[('year','>=','1989')]"></filter>
+		            <group string="Group by" expand="0">
+		                <field string="Status" name="grp_state" context="{'group_by':'state'}"></field>
+		                <field string="Year" name="grp_year" context="{'group_by':'year'}"></field>
+		            </group>
+		        </search>
+	        </field>
+	    </record>   
+    
+    
+	    <record id="education_technical_action" model="ir.actions.act_window">
+	        <field name="name">Education Technical</field>
+	        <field name="res_model">education.technical</field> 
+	        <field name="view_mode">tree,form</field> 
+	    </record>    
+      
+        <menuitem id="education_technical_menu" action="education_technical_action"></menuitem>
+    
+    </data>
+</odoo>

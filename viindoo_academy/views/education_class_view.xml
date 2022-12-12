@@ -1,0 +1,160 @@
+<odoo>
+    <data>
+        <record id="education_class_view_tree" model="ir.ui.view">
+            <field name="name">education.class.tree</field>
+            <field name="model">education.class</field>
+            <field name="arch" type="xml">
+                <tree string="Class Tree" decoration-danger="end_date==today" decoration-info="start_date==today" decoration-warning="state=='done'">
+		             <field name="name"></field>
+		             <field name="description"></field>
+		             <field name="company_id"/>                        
+		             <field name="start_date"/>
+		             <field name="end_date"/>                         
+		             <field name="students_count"/>
+		             <field name="historical_students_count"/>    
+                     <field name="state" decoration-success="state=='done'" widget="badge"></field>		                                 
+                </tree>            
+            </field>
+        </record>
+
+<!--         <record id="action_view_student_count" model="ir.actions.act_window"> -->
+<!--             <field name="name">Action</field> -->
+<!--             <field name="res_model">education.class</field> -->
+<!--             <field name="view_mode">tree</field> -->
+<!--        </record> -->
+       
+        <record id="education_class_form_view" model="ir.ui.view">
+            <field name="name">education.class.form</field>
+            <field name="model">education.class</field>
+            <field name="arch" type="xml">
+                <form string="Class form">
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': 1}"></field>     <!-- Để tạo thanh trạng thái -->
+                    </header> 
+                    <sheet> 
+                    <!-- Nếu không sử dụng group thì đưa vào cặp thẻ div với class="oe_title"; và thẻ h1 
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name">
+                            </h1>
+                        </div>                  
+                    -->     
+                                
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"></widget> 
+                        
+                        <!-- 
+                        - Khi khai báo widget thì cần phải khai báo field active với invisible = 1 
+                        - widget dùng để hiển thị một kiểu đặc trưng được khai báo trước theo từng widget:
+                           - web_ribbon: để hiển thị nút chéo với title được khai báo. Ví dụ archived/unarchived
+                           - statusbar: Để hiển thị trạng thái của bản ghi trong form chi tiết bản ghi.
+                           - image: để khai báo hình ảnh
+                        -->                    
+                      
+                        <!-- thẻ <notebook> dùng kết hợp với <page> để tạo các tab -->                    
+                       
+                        <group>
+                            <group>
+                                <field name="name"></field>
+                                <field name="responsible_id"></field>
+                                <field name="active" invisible="1"></field>  <!-- "invisible=1 là ẩn trường active trên giao diện. Đồng thời cần phải sử dụng widget" -->
+                            </group>
+                            <group>
+                                <field name="description"></field>
+                                <field name="year"></field>
+			                    <field name="start_date"/>
+			                    <field name="end_date"/>  
+                                <field name="company_id"/> 
+                            </group>  
+			                <group>
+			                       <field name="students_count"/>
+			                       <field name="historical_students_count"/>
+			                 </group>                                          
+                        </group>
+                        <notebook>
+                           <page name="student" string="Students">
+                               <field name="student_ids">
+	                               <tree editable="bottom">
+	                                   <field name="name"/>
+	                                   <field name="create_date"/>
+	                                   <field name="create_uid"/>
+	                               </tree>
+                               </field>
+                           </page>
+                           <page name="students" string="Historical Students">
+                               <field name="historical_student_ids">
+                                   <tree>
+                                       <field name="name"/>
+                                       <field name="create_date"/>
+                                       <field name="create_uid"/>
+                                   </tree>
+                               </field>
+                           </page>
+                        </notebook>
+                    </sheet>
+                 </form>
+            </field>        
+        </record>
+        <record id="view_education_class_search" model="ir.ui.view">
+            <field name="name">education.class.search</field>
+            <field name="model">education.class</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"></field>
+                    <field name="description"></field> <!-- Khai báo global search -->
+
+<!-- Sử dụng thẻ <filter> để tạo ra bộ lọc mặc định ở Filter. Trong đó: Cần khai báo 3 thuộc tính: String (Tên bộ lọc) name và domain -->
+<!-- Những bộ lọc cùng phạm trù, cùng tính chất sẽ để cùng một separator. Khi để trong cùng 1 separator thì khi chọn sẽ là bộ lọc 1 HOẶC bộ lọc 2, khác separator là VÀ -->
+                    
+                    <filter string="Draft" name="ftr_state_draft" domain="[('state','=','draft')]"></filter>                  
+                    <filter string="Confirmed" name="ftr_state_confirmed" domain="[('state','=','confirmed')]"></filter>
+
+<!-- Khi sử dụng MỘT BỘ LỌC với điều kiện hoặc/và như ví dụ dưới thì cần sử dụng toán tử (in, <=, =, >=,...)  -->
+
+<!-- Tách separator -->
+                    <separator/>
+                    <filter string="Draft or Confirmed" name="ftr_state_draft_confirm" domain="[('state','in',('draft','confirmed'))]"></filter>
+                    
+                    <separator/>
+                    <filter string="Year" name="ftr_year" domain="[('year','>=','1989')]"></filter>
+                    
+                    <group expand="0" string="Group by">
+                        <filter string="Status" name="grp_state" context="{'group_by':'state'}"></filter>
+                        <filter string="Create Date" name="grp_create_date" context="{'group_by':'create_date'}"></filter>                                         
+                    </group>
+                </search>            
+            </field>            
+        </record>
+        
+        <record id="view_education_class_calendar" model="ir.ui.view">
+            <field name="name">education.class.calendar</field>
+            <field name="model">education.class</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar" date_start="start_date" date_stop="end_date" color="name">
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record id="view_education_class_pivot" model="ir.ui.view">
+           <field name="name">education.class.pivot</field>
+           <field name="model">education.class</field>
+           <field name="arch" type="xml">
+                <pivot string="Class Pivot Analysis">
+<!--                     <field name="country_id"/> -->
+<!--                     <field name="ethnic_id"/> -->
+<!--                     <field name="class_id"/> -->
+                </pivot>
+           </field>
+        </record>
+        
+        <record id="education_class_action" model="ir.actions.act_window">
+            <field name="name">Class</field>
+            <field name="res_model">education.class</field>
+            <field name="view_mode">tree,form,calendar,graph,pivot</field>
+        </record>
+        
+        <menuitem id="education_class_menu" action="education_class_action" sequence="10" parent="menu_root"></menuitem>
+    </data>
+</odoo>

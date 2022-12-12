@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_education_student_ethnic_tree">
+            <field name="name">education.student.ethnic.view.tree</field>
+            <field name="model">education.student.ethnic</field>
+            <field name="arch" type="xml">
+                <tree string="Ethnic Tree View">
+                    <field name="name"/>
+                    <field name="country_ids"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_education_student_ethnic_form">
+            <field name="name">education.student.ethnic.view.form</field>
+            <field name="model">education.student.ethnic</field>
+            <field name="arch" type="xml">
+                <form string="Ethinic Tree Form">
+	                <field name="name"/>
+	                <field name="description"/>
+	                <field name="country_ids"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="ethnic_action" model="ir.actions.act_window">
+            <field name="name">Ethnic</field>
+            <field name="res_model">education.student.ethnic</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="ethnic_menu" action="ethnic_action" parent="menu_root"></menuitem>
+    </data>
+</odoo>

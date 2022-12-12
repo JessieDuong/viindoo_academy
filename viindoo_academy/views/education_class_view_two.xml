@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="view_education_class_tree_inherit" model="ir.ui.view">
+	        <field name="name">education.class.tree.inherit</field>
+	        <field name="model">education.class</field>
+	        <field name="inherit_id" ref="education_class_view_tree"></field>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='description']" position="after">
+ 	                <field name="country_id"></field> 
+	            </xpath>
+	        </field>               
+        </record>      
+        
+       <record id="view_education_class_two_form" model="ir.ui.view">
+           <field name="name">education.class.form.inherit</field>
+           <field name="model">education.class</field>
+           <field name="inherit_id" ref="education_class_form_view"></field>
+           <field name="arch" type="xml">
+               <xpath expr="//field[@name='year']" position="after">
+                       <field name="country_id" string="Name of Country"></field>
+               </xpath>
+           </field>
+       </record>
+   
+    </data>
+</odoo>
