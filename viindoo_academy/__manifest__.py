@@ -26,12 +26,16 @@
     'data': [
         'security/ir.model.access.csv',
         'security/academy_security.xml',
+        
         'views/root_menu.xml',
         'views/education_class_view.xml',
         'views/education_student_view.xml',
         'views/ethnic.xml',
+        'views/academy_enrollment.xml',
         'views/education_class_view_two.xml',
         'views/templates.xml',
+        
+        'wizards/academy_enrollment_wizard.xml',
         
     ],
     # only loaded in demonstration mode

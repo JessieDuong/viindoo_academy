@@ -8,3 +8,5 @@
 "access_education_student_ethnic_user","education_student_ethnic_user","model_education_student_ethnic","viindoo_academy.group_academy_user",1,0,0,0
 "access_education_student_administrator","education_student_administrator","model_education_student","viindoo_academy.group_academy_administrator",1,1,1,1
 "access_education_student_ethnic_administrator","education_student_ethnic_administrator","model_education_student_ethnic","viindoo_academy.group_academy_administrator",1,1,1,1
+"access_academy_enrollment_employee","academy_enrollment_employee","model_academy_enrollment","base.group_user",1,1,1,1
+"access_academy_enrollment_wizard_employee","academy_enrollment_employee_wizard","model_academy_enrollment_wizard","base.group_user",1,1,1,1

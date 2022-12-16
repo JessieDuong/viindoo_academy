@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="view_academy_enrollment_tree" model="ir.ui.view">
+            <field name="name">academy.enrollment.tree</field>
+            <field name="model">academy.enrollment</field>
+            <field name="arch" type="xml">
+                <tree string="Enrollment Tree">
+                     <field name="name"></field>
+                     <field name="student_id"></field>
+                     <field name="class_id"/>                        
+                     <field name="register_date"/>                                                           
+                </tree>            
+            </field>
+        </record>
+       
+        <record id="view_academy_enrollment_form" model="ir.ui.view">
+            <field name="name">academy.enrollment.form</field>
+            <field name="model">academy.enrollment</field>
+            <field name="arch" type="xml">
+                <form string="Enrollment form">
+                    <sheet>
+                         <group>
+                            <group>
+                                <field name="name"></field>
+                                <field name="student_id"></field>
+                                <field name="class_id"></field>                                
+                            </group>
+                            <group>
+                                <field name="register_date"/>  
+                            </group>                                           
+                        </group>
+                   </sheet>
+                 </form>
+            </field>        
+        </record>
+        
+        <record id="view_academy_enrollment_search" model="ir.ui.view">
+            <field name="name">academy.enrollment.search</field>
+            <field name="model">academy.enrollment</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"></field>
+                    <field name="student_id"></field> <!-- Khai báo global search -->
+                    <field name="class_id"></field>                                       
+                </search>            
+            </field>            
+        </record>
+        
+        <record id="academy_enrollment_action" model="ir.actions.act_window">
+            <field name="name">Enrollment</field>
+            <field name="res_model">academy.enrollment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="academy_enrollment_menu" action="academy_enrollment_action" sequence="13" parent="menu_root"></menuitem>
+    </data>
+</odoo>
