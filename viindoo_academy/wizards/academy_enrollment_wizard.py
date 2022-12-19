@@ -22,14 +22,15 @@ class AcademyEnrollmentWizard(models.TransientModel):
         student_id = self.student_ids
         #
         vals_list = []
-        for st in self.student_ids:
-            for cls in self.class_ids:
+        for st in student_id:
+            for cls in class_id:
                 vals = {
-                    'class_id': self.cls.id,
-                    'student_id': self.st.id,
+                    'class_id': cls.id,
+                    'student_id': st.id,
                     'register_date': self.register_date,
                 }
                 vals_list.append(vals)
         self.env['academy.enrollment'].create(vals_list)
         # return class_id.action_enroll_class_apply(enrollment=self.student_ids.id)
-        return      
+        return    
+      

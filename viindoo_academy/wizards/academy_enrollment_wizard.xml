@@ -8,7 +8,6 @@
                     <group class="oe_title">
                         <field name="student_ids"/>
                         <field name="register_date"/>
-<!--                         <field name="end_date"/> -->
                     </group>
                     <footer>
                         <button name="action_enroll_class_apply" string="Submit" type="object" class="btn-primary"/>
