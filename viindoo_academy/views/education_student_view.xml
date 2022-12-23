@@ -18,6 +18,10 @@
             <field name="model">education.student</field>
             <field name="arch" type="xml">
                 <form string="Student form">
+                    <header>
+                        <button name="%(viindoo_academy.education_enrollment_sigle_action)d" string="Enroll" class="btn-primary" data-hotkey="E" title="Enroll student to class"
+                            type="action" context="{'default_enroll_id': active_id}"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <h1>

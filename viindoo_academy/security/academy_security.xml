@@ -13,9 +13,9 @@
         </record>
         
          <record model="res.groups" id="group_academy_administrator">
-            <field name="name">Administrator</field>
-            <field name="category_id" ref="module_category_academy_user"></field>   
-            <field name="implied_ids" eval="[(4, ref('group_academy_user'))]"/>    
+	         <field name="name">Administrator</field>
+	         <field name="category_id" ref="module_category_academy_user"></field>   
+	         <field name="implied_ids" eval="[(4, ref('group_academy_user'))]"/>    
 <!--             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>        -->
         </record>
            

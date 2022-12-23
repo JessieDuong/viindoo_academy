@@ -22,43 +22,22 @@
 <!--             <field name="res_model">education.class</field> -->
 <!--             <field name="view_mode">tree</field> -->
 <!--        </record> -->
-       
+                  
         <record id="education_class_form_view" model="ir.ui.view">
             <field name="name">education.class.form</field>
             <field name="model">education.class</field>
             <field name="arch" type="xml">
                 <form string="Class form">
                     <header>
-                        <field name="state" widget="statusbar" options="{'clickable': 1}"></field>     <!-- Để tạo thanh trạng thái -->
-                        <button name="%(viindoo_academy.academy_enrollment_class_action)d" string="Enroll" class="btn-primary" data-hotkey="E" title="Enroll student to class"
+                        <button name="%(viindoo_academy.education_enrollment_sigle_action)d" string="Enroll" class="btn-primary" data-hotkey="E" title="Enroll student to class"
                             type="action" context="{'default_enroll_id': active_id}"/>
-                    </header> 
-                    <sheet> 
-                    <!-- Nếu không sử dụng group thì đưa vào cặp thẻ div với class="oe_title"; và thẻ h1 
-                        <div class="oe_title">
-                            <h1>
-                                <field name="name">
-                            </h1>
-                        </div>                  
-                    -->     
-                                
-                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"></widget> 
-                        
-                        <!-- 
-                        - Khi khai báo widget thì cần phải khai báo field active với invisible = 1 
-                        - widget dùng để hiển thị một kiểu đặc trưng được khai báo trước theo từng widget:
-                           - web_ribbon: để hiển thị nút chéo với title được khai báo. Ví dụ archived/unarchived
-                           - statusbar: Để hiển thị trạng thái của bản ghi trong form chi tiết bản ghi.
-                           - image: để khai báo hình ảnh
-                        -->                    
-                      
-                        <!-- thẻ <notebook> dùng kết hợp với <page> để tạo các tab -->                    
-                       
+                    </header>                   
+                    <sheet>
                         <group>
                             <group>
                                 <field name="name"></field>
                                 <field name="responsible_id"></field>
-                                <field name="active" invisible="1"></field>  <!-- "invisible=1 là ẩn trường active trên giao diện. Đồng thời cần phải sử dụng widget" -->
+                                <field name="active" invisible="1"></field>
                             </group>
                             <group>
                                 <field name="description"></field>
@@ -71,30 +50,10 @@
                                    <field name="students_count"/>
                                    <field name="historical_students_count"/>
                              </group>                                          
-                        </group>
-                        <notebook>
-                           <page name="student" string="Students">
-                               <field name="student_ids">
-                                   <tree editable="bottom">
-                                       <field name="name"/>
-                                       <field name="create_date"/>
-                                       <field name="create_uid"/>
-                                   </tree>
-                               </field>
-                           </page>
-                           <page name="students" string="Historical Students">
-                               <field name="historical_student_ids">
-                                   <tree>
-                                       <field name="name"/>
-                                       <field name="create_date"/>
-                                       <field name="create_uid"/>
-                                   </tree>
-                               </field>
-                           </page>
-                        </notebook>
+                        </group>                            
                     </sheet>
-                 </form>
-            </field>        
+                </form>
+            </field>            
         </record>
 
         <record id="view_education_class_search" model="ir.ui.view">

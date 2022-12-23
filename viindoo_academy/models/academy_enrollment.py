@@ -9,14 +9,16 @@ class AcademyEnrollment(models.Model):
     
     student_id = fields.Many2one(
         comodel_name='education.student',
-        string='Students'
+        string='Student'
         )
     
     class_id = fields.Many2one(
         comodel_name='education.class',
-        string='Registered Class',
+        string='Class',
         )
     
     register_date = fields.Date(
-        string='Enrollment Time')
+        string='Enrollment Time',
+        help="The date on which the student enrolls")
+    
 

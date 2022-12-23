@@ -1,37 +1,68 @@
 <odoo>
     <data>
         <record id="view_academy_enrollment_wizard_form" model="ir.ui.view">
-            <field name="name">academy.enrollment.wizard.form</field>
-            <field name="model">academy.enrollment.wizard</field>
+<!--             <field name="name">academy.enrollment.wizard.form</field> -->
+<!--             <field name="model">academy.enrollment.wizard</field> -->
+            <field name="name">wizard.enrollment.single.form</field>
+            <field name="model">wizard.enrollment.single</field>
             <field name="arch" type="xml">
                 <form string="Enrollment">
                     <group class="oe_title">
-                        <field name="student_ids"/>
-                        <field name="register_date"/>
+                        <field name="registration_number"/>
+                        <field name="class_id" attrs="{'invisible':[('active_model','=','education.class')]}"/>
+                        <field name="student_id" attrs="{'invisible':[('active_model','=','education.student')]}"/>                        <field name="date"/>
+                        <field name="active_model" invisible="1"/>                     
+                        <field name="date"/>
                     </group>
                     <footer>
-                        <button name="action_enroll_class_apply" string="Submit" type="object" class="btn-primary"/>
+<!--                         <button name="action_enroll_class_apply" string="Submit" type="object" class="btn-primary"/> -->
+<!--                         <button string="Cancel" class="btn-secondary" special="cancel"/> -->
+                        <button name="enroll" string="Submit" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
                 </form>
             </field>
         </record>
         
-        <record id="academy_enrollment_class_action" model="ir.actions.act_window">
-            <field name="name">Academy Enrollment</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">academy.enrollment.wizard</field>
+<!--         <record id="academy_enrollment_class_action" model="ir.actions.act_window"> -->
+<!--             <field name="name">Academy Enrollment</field> -->
+<!--             <field name="type">ir.actions.act_window</field> -->
+<!--             <field name="res_model">academy.enrollment.wizard</field> -->
+<!--             <field name="view_mode">form</field> -->
+<!--             <field name="view_id" ref="view_academy_enrollment_wizard_form"/> -->
+<!--             <field name="target">new</field> -->
+<!--         </record> -->
+
+        <record id="education_enrollment_sigle_action" model="ir.actions.act_window">
+            <field name="name">Sigle Enrollment Wizard</field>
+            <field name="res_model">wizard.enrollment.single</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_academy_enrollment_wizard_form"/>
             <field name="target">new</field>
         </record>
         
-        <record id="launch_academy_enrollment_class_action" model="ir.actions.act_window">
-            <field name="name">Academy Enrollment</field>
-            <field name="res_model">academy.enrollment.wizard</field>
+<!--         <record id="launch_academy_enrollment_class_action" model="ir.actions.act_window"> -->
+<!--             <field name="name">Academy Enrollment</field> -->
+<!--             <field name="res_model">academy.enrollment.wizard</field> -->
+<!--             <field name="view_mode">form</field> -->
+<!--             <field name="target">new</field> -->
+<!--             <field name="binding_model_id" ref="model_education_class"/> -->
+<!--             <field name="binding_view_types">list</field> -->
+<!--         </record> -->
+        
+        <record id="launch_education_enrollment_class_action" model="ir.actions.act_window">
+            <field name="name">Education Enrollment</field>
+            <field name="res_model">wizard.enrollment.single</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
             <field name="binding_model_id" ref="model_education_class"/>
+            <field name="binding_view_types">list</field>
+        </record>
+        <record id="launch_education_enrollment_class_action" model="ir.actions.act_window">
+            <field name="name">Education Enrollment</field>
+            <field name="res_model">wizard.enrollment.single</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_education_student"/>
             <field name="binding_view_types">list</field>
         </record>
     </data>
