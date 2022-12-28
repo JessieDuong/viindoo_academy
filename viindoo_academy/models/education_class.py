@@ -78,8 +78,7 @@ class EducationClass(models.Model):
     
     _sql_constraints = [
         ('unique_class_name','unique(name)','The class name must be unique'),
-        ] 
-            
+        ]    
     # @api.onchange('name')
     # def _onchange_name(self):
     #     if self.name:

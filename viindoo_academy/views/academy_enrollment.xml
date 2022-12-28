@@ -8,7 +8,7 @@
                      <field name="name"></field>
                      <field name="student_id"></field>
                      <field name="class_id"/>                        
-                     <field name="register_date"/>                                                           
+                     <field name="date"/>                                                           
                 </tree>            
             </field>
         </record>
@@ -26,7 +26,7 @@
                                 <field name="class_id"></field>                                
                             </group>
                             <group>
-                                <field name="register_date"/>  
+                                <field name="date"/>  
                             </group>                                           
                         </group>
                    </sheet>

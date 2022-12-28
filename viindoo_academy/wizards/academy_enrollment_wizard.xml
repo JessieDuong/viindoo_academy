@@ -7,17 +7,40 @@
             <field name="model">wizard.enrollment.single</field>
             <field name="arch" type="xml">
                 <form string="Enrollment">
-                    <group class="oe_title">
+                    <group>
                         <field name="registration_number"/>
                         <field name="class_id" attrs="{'invisible':[('active_model','=','education.class')]}"/>
-                        <field name="student_id" attrs="{'invisible':[('active_model','=','education.student')]}"/>                        <field name="date"/>
-                        <field name="active_model" invisible="1"/>                     
+                        <field name="student_id" attrs="{'invisible':[('active_model','=','education.student')]}"/>
                         <field name="date"/>
+                        <field name="active_model" invisible="1"/>                     
+<!--                         <field name="date"/> -->
                     </group>
                     <footer>
 <!--                         <button name="action_enroll_class_apply" string="Submit" type="object" class="btn-primary"/> -->
 <!--                         <button string="Cancel" class="btn-secondary" special="cancel"/> -->
                         <button name="enroll" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_wizard_enrollment_multi_form" model="ir.ui.view">
+            <field name="name">wizard.enrollment.multi.form</field>
+            <field name="model">wizard.enrollment.multi</field>
+            <field name="arch" type="xml">
+                <form string="Multi Enrollment">
+                    <field name = "line_ids">
+	                    <tree editable="bottom">
+	                        <field name="registration_number"/>
+	                        <field name="class_id" attrs="{'invisible':[('active_model','=','education.class')]}"/>
+	                        <field name="student_id" attrs="{'invisible':[('active_model','=','education.student')]}"/>
+	                        <field name="date"/>
+	                        <field name="active_model" invisible="0"/>                     
+	                    </tree>
+                    </field>
+                    <footer>
+                        <button name="enrollmulti" string="Submit" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
                 </form>
@@ -49,17 +72,18 @@
 <!--             <field name="binding_view_types">list</field> -->
 <!--         </record> -->
         
-        <record id="launch_education_enrollment_class_action" model="ir.actions.act_window">
-            <field name="name">Education Enrollment</field>
-            <field name="res_model">wizard.enrollment.single</field>
+        <record id="multi_enrollment_class_action" model="ir.actions.act_window">
+            <field name="name">Enrollment</field>
+            <field name="res_model">wizard.enrollment.multi</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
             <field name="binding_model_id" ref="model_education_class"/>
             <field name="binding_view_types">list</field>
         </record>
-        <record id="launch_education_enrollment_class_action" model="ir.actions.act_window">
-            <field name="name">Education Enrollment</field>
-            <field name="res_model">wizard.enrollment.single</field>
+        
+        <record id="multi_enrollment_student_action" model="ir.actions.act_window">
+            <field name="name">Multi Enrollment</field>
+            <field name="res_model">wizard.enrollment.multi</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
             <field name="binding_model_id" ref="model_education_student"/>

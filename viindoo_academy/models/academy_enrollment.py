@@ -17,7 +17,7 @@ class AcademyEnrollment(models.Model):
         string='Class',
         )
     
-    register_date = fields.Date(
+    date = fields.Date(
         string='Enrollment Time',
         help="The date on which the student enrolls")
     

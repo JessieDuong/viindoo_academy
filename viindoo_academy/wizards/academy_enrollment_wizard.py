@@ -11,6 +11,7 @@ class WizardEnrollmentSingle(models.TransientModel):
     date = fields.Date(default=fields.Date.today,
                        help="The date on which the student enrolls")
     active_model = fields.Char()
+    wizard_multi_id = fields.Many2one(comodel_name='wizard.enrollment.multi')
     # Hàm lấy dữ liệu mặc định.
     @api.model
     def default_get(self, fields_list):
@@ -20,17 +21,15 @@ class WizardEnrollmentSingle(models.TransientModel):
         active_id = self._context.get('active_id')
         
         if active_model == 'education.class':
-            res['class_id'] = active_id
-            
+            res['class_id'] = active_id    
         elif active_model == 'education.student':
-            res['student_id'] = active_id
-            
-        res['active_model'] = self._context.get('active_model')
+            res['student_id'] = active_id    
+        res['active_model'] = active_model
         res['date'] = fields.Date.today()
         return res
     
     def enroll(self):
-       # Nếu khi khai báo trường class_id và student_id mà đã có thuộc tính required=True thì không cần đoạn code check Error này nữa.
+        # Nếu khi khai báo trường class_id và student_id mà đã có thuộc tính required=True thì không cần đoạn code check Error này nữa.
         if not self.class_id or not self.student_id:
             raise UserError(_("You must specify both class and student first."))
         
@@ -74,3 +73,25 @@ class WizardEnrollmentSingle(models.TransientModel):
 #         # return class_id.action_enroll_class_apply(enrollment=self.student_ids.id)
 #         return    
 #
+
+class WizardEnrollmentMulti(models.TransientModel):
+    _name='wizard.enrollment.multi'
+    _description='Multi Enrollment Wizard'  
+    
+    line_ids = fields.One2many(comodel_name='wizard.enrollment.single', inverse_name='wizard_multi_id')
+      
+    def enrollmulti(self):
+        vals_list = []
+        active_model = self._context.get('active_model') #_context là từ self
+        records = self.env[active_model].browse(self.env.context.get('active_ids'))  #context là phương thức của env nên việc lấy self._context sẽ giống như env.context
+        for record in records:
+            for line in self.line_ids:
+                vals_list.append({
+                    'name': line.registration_number,
+                    'class_id': record.id if active_model == 'education.class' else line.class_id.id,
+                    'student_id': record.id if active_model == 'education.student' else line.student_id.id,
+                    'date': line.date or fields.Date.today()                    
+                    })
+        self.env['academy.enrollment'].create(vals_list)
+
+    
